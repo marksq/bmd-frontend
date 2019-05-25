@@ -34,10 +34,12 @@ export default {
 
 ul
   margin: 0
-  padding: 4px
+  padding: 10px 4px 4px 4px
   
 ul li 
   display: inline
   margin-right: 5px
   padding: 3px 
+.router-link-active
+  font-weight: bold
 </style>

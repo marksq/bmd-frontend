@@ -1,6 +1,7 @@
 <template>
   <div class="questionnaires">
-    <Menu></Menu>
+    <Header/>
+    <Menu/>
     <h1>Анкеты кандидатов</h1>
     <table>
       <thead>
@@ -26,6 +27,7 @@
 <script>
 // @ is an alias to /src
 import Menu from "@/components/Menu.vue";
+import Header from "@/components/Header.vue";
 
 export default {
   name: "questionnaire",
@@ -54,7 +56,7 @@ export default {
       }
     ]
   }),
-  components: { Menu }
+  components: { Menu, Header }
 };
 </script>
 

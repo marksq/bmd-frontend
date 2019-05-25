@@ -1,9 +1,10 @@
 <template>
   <div class="home">
-    <Menu></Menu>
+    <Header/>
+    <Menu/>
     <h1>Редактирование анкеты</h1>
     <div>
-      <textarea-field label="Описание набора полей в формате JSON"></textarea-field>
+      <textarea-field label="Шаблон в формате html + vue"></textarea-field>
     </div>
   </div>
 </template>
@@ -12,12 +13,14 @@
 import axios from "axios";
 import Menu from "@/components/Menu.vue";
 import TextareaField from "@/components/fields/TextareaField.vue";
+import Header from "@/components/Header.vue";
 
 export default {
   name: "home",
   components: {
     TextareaField,
-    Menu
+    Menu,
+    Header
   },
   data: () => ({
     survey: {},
