@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Surveys from "./views/Surveys.vue";
 import SubmittedSurvey from "./views/SubmittedSurvey.vue";
+import QuestionnaryEdit from "./views/QuestionnaryEdit.vue";
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ export default new Router({
       path: "/submitted",
       name: "submittedSurvey",
       component: SubmittedSurvey
+    },
+    {
+      path: "/questionnary-edit",
+      name: "QuestionnaryEdit",
+      component: QuestionnaryEdit
     },
     {
       path: "/about",
