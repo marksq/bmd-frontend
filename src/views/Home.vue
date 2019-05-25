@@ -95,7 +95,7 @@ export default {
     createSurvey() {
       axios
         .post("/address/", this.survey)
-        .then(() => {
+        .then(response => {
           console.log("response: ", response);
         })
         .catch(error => {

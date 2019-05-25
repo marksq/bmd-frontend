@@ -1,32 +1,24 @@
 <template>
   <div class="surveys">
-    <div>sdvsdvs</div>
     <div>
-      Поиск анкеты
-      <div>
-        <form>
-          <input type="text">№ кандидата
-          <input type="text">
-ФИО кандидата
-        </form>
-      </div>
+      <h1>Анкеты кандидатов</h1>
     </div>
-
+    <br>
     <table>
       <thead>
-        <tr>
+        <tr class="cell">
           <th>№ кандидата</th>
           <th>ФИО</th>
           <th>Статус</th>
           <th>Дата создания</th>
           <th>Дата редактирования</th>
         </tr>
-        <tr v-for="survey in surveys" :key="survey.id">
-          <td>{{survey.id}}</td>
-          <td>{{survey.name}}</td>
-          <td>{{survey.status}}</td>
-          <td>{{survey.created_date}}</td>
-          <td>{{survey.modyfied_date}}</td>
+        <tr v-for="survey in surveys" :key="survey.id" class="cell">
+          <td class="nonTextInCell">{{survey.id}}</td>
+          <td class="textInCell">{{survey.name}}</td>
+          <td class="textInCell">{{survey.status}}</td>
+          <td class="nonTextInCell">{{survey.created_date}}</td>
+          <td class="nonTextInCell">{{survey.modyfied_date}}</td>
         </tr>
       </thead>
     </table>
@@ -67,3 +59,29 @@ export default {
   components: {}
 };
 </script>
+
+<style lang="sass" scoped>
+table
+  border-spacing: 0
+
+td, th
+  border: 1px solid black
+  padding: 5px 10px
+
+
+.textInCell  
+  text-align: left
+
+.nonTextInCell
+  text-align: right
+
+.checkboxContainer
+  display: inline-block
+
+.label
+  display: inline
+  position: relative
+  top: -2px
+  user-select: none
+  font-weight: 500
+</style>
