@@ -1,11 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import Surveys from "./views/Surveys.vue";
+import Questionnaires from "./views/Questionnaires.vue";
 import SubmittedSurvey from "./views/SubmittedSurvey.vue";
-import QuestionnaireDesigner from "./views/QuestionnaireDesigner.vue";
+import TemplatesDesigner from "./views/TemplatesDesigner.vue";
 import QuestionnaireEdit from "./views/QuestionnaireEdit.vue";
 import WithComments from "./views/WithComments.vue";
+import TemplateEdit from "./views/TemplateEdit.vue";
 
 Vue.use(Router);
 
@@ -17,14 +18,19 @@ export default new Router({
       component: Home
     },
     {
-      path: "/surveys",
-      name: "Surveys",
-      component: Surveys
+      path: "/questionnaires",
+      name: "Questionnaires",
+      component: Questionnaires
     },
     {
-      path: "/questionnaireDesigner",
-      name: "QuestionnaireDesigner",
-      component: QuestionnaireDesigner
+      path: "/templates-designer",
+      name: "TemplatesDesigner",
+      component: TemplatesDesigner
+    },
+    {
+      path: "/template-edit",
+      name: "TemplateEdit",
+      component: TemplateEdit
     },
     {
       path: "/questionnaire",

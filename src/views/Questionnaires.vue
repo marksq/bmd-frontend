@@ -1,9 +1,8 @@
 <template>
-  <div class="surveys">
-    <div>
-      <h1>Анкеты кандидатов</h1>
-    </div>
-    <br>
+  <div class="questionnaires">
+    <Header/>
+    <Menu/>
+    <h1>Анкеты кандидатов</h1>
     <table>
       <thead>
         <tr class="cell">
@@ -13,12 +12,12 @@
           <th>Дата создания</th>
           <th>Дата редактирования</th>
         </tr>
-        <tr v-for="survey in surveys" :key="survey.id" class="cell">
-          <td class="nonTextInCell">{{survey.id}}</td>
-          <td class="textInCell">{{survey.name}}</td>
-          <td class="textInCell">{{survey.status}}</td>
-          <td class="nonTextInCell">{{survey.created_date}}</td>
-          <td class="nonTextInCell">{{survey.modyfied_date}}</td>
+        <tr v-for="questionnaire in questionnaires" :key="questionnaire.id" class="cell">
+          <td class="nonTextInCell">{{questionnaire.id}}</td>
+          <td class="textInCell">{{questionnaire.name}}</td>
+          <td class="textInCell">{{questionnaire.status}}</td>
+          <td class="nonTextInCell">{{questionnaire.created_date}}</td>
+          <td class="nonTextInCell">{{questionnaire.modyfied_date}}</td>
         </tr>
       </thead>
     </table>
@@ -27,12 +26,13 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
+import Menu from "@/components/Menu.vue";
+import Header from "@/components/Header.vue";
 
 export default {
-  name: "surveys",
+  name: "questionnaire",
   data: () => ({
-    surveys: [
+    questionnaires: [
       {
         id: "1",
         name: "Васька",
@@ -56,7 +56,7 @@ export default {
       }
     ]
   }),
-  components: {}
+  components: { Menu, Header }
 };
 </script>
 
@@ -84,4 +84,5 @@ td, th
   top: -2px
   user-select: none
   font-weight: 500
+  
 </style>

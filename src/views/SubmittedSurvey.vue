@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Header/>
     <h1>Анкета кандидата в доноры принята</h1>
     <div>
       <p>
@@ -15,10 +16,11 @@
 
 <script>
 import axios from "axios";
+import Header from "@/components/Header.vue";
 
 export default {
   name: "home",
-  components: {},
+  components: { Header },
   data: () => ({
     survey: {},
     genders: [

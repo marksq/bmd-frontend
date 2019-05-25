@@ -1,5 +1,7 @@
 <template>
-  <div class="questionnaireDesigner">
+  <div class="templatesDesigner">
+    <Header/>
+    <Menu/>
     <div>
       <h1>Конструктор печатных форм Анкет</h1>
     </div>
@@ -10,9 +12,9 @@
           <th>№ анкеты</th>
           <th>Наименование анкеты</th>
         </tr>
-        <tr v-for="questionnaire in questionnaires" :key="questionnaire.id" class="cell">
-          <td class="nonTextInCell">{{questionnaire.id}}</td>
-          <td class="textInCell">{{questionnaire.name}}</td>
+        <tr v-for="template in templates" :key="template.id" class="cell">
+          <td class="nonTextInCell">{{template.id}}</td>
+          <td class="textInCell">{{template.name}}</td>
         </tr>
       </thead>
     </table>
@@ -21,12 +23,13 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
+import Menu from "@/components/Menu.vue";
+import Header from "@/components/Header.vue";
 
 export default {
-  name: "questionnaireDesigner",
+  name: "templateDesigner",
   data: () => ({
-    questionnaires: [
+    templates: [
       {
         id: "1",
         name: "Анкета состояния здоровья"
@@ -50,7 +53,7 @@ export default {
       }
     ]
   }),
-  components: {}
+  components: { Header, Menu }
 };
 </script>
 
