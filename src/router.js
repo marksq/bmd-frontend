@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Surveys from "./views/Surveys.vue";
+import SubmittedSurvey from "./views/SubmittedSurvey.vue";
 
 Vue.use(Router);
 
@@ -16,6 +17,11 @@ export default new Router({
       path: "/surveys",
       name: "Surveys",
       component: Surveys
+    },
+    {
+      path: "/submitted",
+      name: "submittedSurvey",
+      component: SubmittedSurvey
     },
     {
       path: "/about",
