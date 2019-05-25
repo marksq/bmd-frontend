@@ -5,6 +5,7 @@ import Surveys from "./views/Surveys.vue";
 import SubmittedSurvey from "./views/SubmittedSurvey.vue";
 import QuestionnaireDesigner from "./views/QuestionnaireDesigner.vue";
 import QuestionnaireEdit from "./views/QuestionnaireEdit.vue";
+import WithComments from "./views/WithComments.vue";
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: "/questionnaireDesigner",
       name: "QuestionnaireDesigner",
       component: QuestionnaireDesigner
+    },
+    {
+      path: "/questionnaire",
+      name: "questionnaire",
+      component: WithComments
     },
     {
       path: "/submitted",

@@ -2,22 +2,15 @@
   <div class="home">
     <Header/>
     <h1>Анкета кандидата в доноры</h1>
+    <h2>Комментарий сотрудника регистра</h2>
+    <div>
+      <p>Вам нужно исправить поля такие-то и такие-то.</p>
+    </div>
     <div v-for="field in fields" :key="field.key">
       <h2 v-if="field.type == 'header'">{{field.label}}</h2>
       <h3 v-if="field.type == 'subheader'">{{field.label}}</h3>
-      <text-field
-        v-if="field.type == 'text'"
-        :label="field.label"
-        v-model="survey[field.key]"
-        :required="field.required"
-      />
-      <radio-field
-        v-if="field.type == 'radio'"
-        :label="field.label"
-        v-model="survey[field.key]"
-        :required="field.required"
-        :options="options[field.options]"
-      />
+      <property v-if="field.type == 'text'" :label="field.label" :content="survey[field.key]"/>
+      <property v-if="field.type == 'radio'" :label="field.label" :v-model="survey[field.key]"/>
     </div>
     <button class="main-button" @click="createSurvey()">Отправить анкету</button>
   </div>
@@ -27,6 +20,7 @@
 import axios from "axios";
 
 // @ is an alias to /src
+import Property from "@/components/Property.vue";
 import TextField from "@/components/fields/TextField.vue";
 import RadioField from "@/components/fields/RadioField.vue";
 import Header from "@/components/Header.vue";
@@ -36,7 +30,8 @@ export default {
   components: {
     TextField,
     RadioField,
-    Header
+    Header,
+    Property
   },
   data: () => ({
     fields: [
