@@ -1,103 +1,25 @@
 <template>
   <div class="home">
+    <Header/>
     <h1>Анкета кандидата в доноры</h1>
-    <h2>Основные и контактные данные</h2>
-    <text-field label="Фамилия" v-model="survey.last_name" :required="true"/>
-    <text-field label="Имя" v-model="survey.first_name" :required="true"/>
-    <text-field label="Отчество" v-model="survey.second_name" :required="true"/>
-    <text-field label="Дата рождения" v-model="survey.birth_date" :required="true"/>
-    <radio-field label="Пол" v-model="survey.gender" :required="true" :options="genders"/>
-    <text-field label="Телефон" v-model="survey.phone"/>
-    <text-field label="Мобильный телефон" v-model="survey.mobile_phone" :required="true"/>
-    <text-field label="Электронная почта" v-model="survey.email" :required="true"/>
-    <text-field label="Другие способы связи" v-model="survey.other_contacts"/>
-    <text-field label="Адрес" v-model="survey.address" :required="true"/>
-    <radio-field
-      label="Этническая группа"
-      v-model="survey.ethnicity"
-      :required="true"
-      :options="enhnicities"
-    />
-    <text-field label="Дата заполнения" v-model="survey.created_date" :required="true"/>
-    <h2>Медицинские данные</h2>
-    <h3>Общие вопросы</h3>
-    <radio-field
-      label="Были ли у вас беременности?"
-      v-model="survey.has_been_pregnant"
-      :required="true"
-      :options="yesno"
-    />
-    <text-field
-      label="Сколько беременностей у вас было?"
-      v-model="survey.count_of_pregnant"
-      :required="true"
-    />
-    <text-field
-      label="Групп крови и резус-фактор (если известны)"
-      v-model="survey.blood_type"
-      :required="true"
-    />
-    <radio-field
-      label="Проводилось ли вам переливание крови?"
-      v-model="survey.blood_transfusion"
-      :required="true"
-      :options="yesno"
-    />
-    <text-field label="Что переливали" v-model="survey.type_of_transfusion" :required="true"/>
-    <text-field label="Когда переливали" v-model="survey.year_of_transfusion" :required="true">
-      <div slot="extra">год</div>
-    </text-field>
-    <text-field
-      label="Сколько раз переливали"
-      v-model="survey.type_of_transfusion"
-      :required="true"
-    />
-    <radio-field
-      label="Есть ли у вас аллергия?"
-      v-model="survey.allergy"
-      :required="true"
-      :options="yesno"
-    />
-    <text-field label="На какие аллергены?" v-model="survey.type_of_transfusion" :required="true"/>
-    <text-field label="Рост" v-model="survey.type_of_transfusion" :required="true">
-      <div slot="extra">см</div>
-    </text-field>
-    <radio-field
-      label="Курите ли вы?"
-      v-model="survey.is_smoking"
-      :required="true"
-      :options="yesno"
-    />
-    <radio-field
-      label="Регулярно ли вы употребляете алкоголь?"
-      v-model="survey.is_smoking"
-      :required="true"
-      :options="yesno"
-    />
-    <radio-field
-      label="Вы когда-нибудь были донором крови?"
-      v-model="survey.is_donor"
-      :required="true"
-      :options="yesno"
-    />
-    <radio-field
-      label="Вас когда-нибудь отстраняли от донорства?"
-      v-model="survey.is_dismissal_of_donoring"
-      :required="true"
-      :options="yesno"
-    />
-    <text-field
-      label="Какова была причина отстранения"
-      v-model="survey.dismiss_reason"
-      :required="true"
-    />
-    <radio-field
-      label="Принимаете ли вы на данный момент какие-нибудь медицинские препараты?"
-      v-model="survey.is_dismissal_of_donoring"
-      :required="true"
-      :options="yesno"
-    />
-    <button @click="createSurvey()">Отправить анкету</button>
+    <div v-for="field in fields" :key="field.key">
+      <h2 v-if="field.type == 'header'">{{field.label}}</h2>
+      <h3 v-if="field.type == 'subheader'">{{field.label}}</h3>
+      <text-field
+        v-if="field.type == 'text'"
+        :label="field.label"
+        v-model="survey[field.key]"
+        :required="field.required"
+      />
+      <radio-field
+        v-if="field.type == 'radio'"
+        :label="field.label"
+        v-model="survey[field.key]"
+        :required="field.required"
+        :options="options[field.options]"
+      />
+    </div>
+    <button class="main-button" @click="createSurvey()">Отправить анкету</button>
   </div>
 </template>
 
@@ -107,77 +29,238 @@ import axios from "axios";
 // @ is an alias to /src
 import TextField from "@/components/fields/TextField.vue";
 import RadioField from "@/components/fields/RadioField.vue";
+import Header from "@/components/Header.vue";
 
 export default {
   name: "home",
   components: {
     TextField,
-    RadioField
+    RadioField,
+    Header
   },
   data: () => ({
+    fields: [
+      {
+        type: "header",
+        label: "Основные и контактные данные"
+      },
+      {
+        type: "text",
+        label: "Фамилия",
+        key: "last_name",
+        required: true
+      },
+      {
+        type: "text",
+        label: "Имя",
+        key: "first_name",
+        required: true
+      },
+      {
+        type: "text",
+        label: "Отчество",
+        key: "second_name",
+        required: true
+      },
+      {
+        type: "text",
+        label: "Дата рождения",
+        key: "birth_date",
+        required: true
+      },
+      {
+        type: "radio",
+        label: "Пол",
+        key: "last_name",
+        options: "genders",
+        required: true
+      },
+      {
+        type: "text",
+        label: "Телефон",
+        key: "phone",
+        required: true
+      },
+      {
+        type: "text",
+        label: "Мобильный телефон",
+        key: "mobile_phone",
+        required: true
+      },
+      {
+        type: "text",
+        label: "Электронная почта",
+        key: "email",
+        required: true
+      },
+      {
+        type: "text",
+        label: "Другие способы связи",
+        key: "other_contacts",
+        required: false
+      },
+      {
+        type: "text",
+        label: "Адрес",
+        key: "address",
+        required: true
+      },
+      {
+        type: "text",
+        label: "Этническая группа",
+        key: "ethnicity",
+        required: true,
+        options: "enhnicities"
+      },
+      {
+        type: "text",
+        label: "Дата заполнения",
+        key: "filling_date",
+        required: true
+      },
+      {
+        type: "header",
+        label: "Медицинские данные"
+      },
+      {
+        type: "subheader",
+        label: "Общие вопросы"
+      },
+      {
+        type: "radio",
+        label: "Были ли у вас беременности?",
+        key: "has_been_pregnant",
+        required: false,
+        options: "yesno"
+      },
+      {
+        type: "text",
+        label: "Сколько беременностей у вас было?",
+        key: "count_of_pregnant",
+        required: false
+      },
+      {
+        type: "text",
+        label: "Группа крови и резус-фактор",
+        key: "blood_type",
+        required: false
+      },
+      {
+        type: "radio",
+        label: "Проводилось ли вам переливание крови?",
+        key: "blood_transfusion",
+        required: true,
+        options: "yesno"
+      },
+      {
+        type: "text",
+        label: "Что переливали",
+        key: "type_of_transfusion",
+        required: false
+      },
+      {
+        type: "text",
+        label: "Когда переливали (год)",
+        key: "year_of_transfusion",
+        required: false
+      },
+      {
+        type: "text",
+        label: "Сколько раз переливали",
+        key: "count_of_transfusion",
+        required: false
+      },
+      {
+        type: "radio",
+        label: "Есть ли у вас аллергия?",
+        key: "last_name",
+        required: true,
+        options: "yesno"
+      },
+      {
+        type: "text",
+        label: "На какие аллергены?",
+        key: "last_name",
+        required: true
+      },
+      {
+        type: "text",
+        label: "Рост",
+        key: "height",
+        required: true
+      },
+      {
+        type: "text",
+        label: "Вес",
+        key: "weight",
+        required: true
+      }
+    ],
     survey: {},
-    genders: [
-      {
-        id: "male",
-        name: "Мужской"
-      },
-      {
-        id: "female",
-        name: "Женский"
-      }
-    ],
-    yesno: [
-      {
-        id: true,
-        name: "Да"
-      },
-      {
-        id: false,
-        name: "Нет"
-      }
-    ],
-    enhnicities: [
-      {
-        id: "russians",
-        name: "Русские"
-      },
-      {
-        id: "tatars",
-        name: "Татары"
-      },
-      {
-        id: "ukrainians",
-        name: "Украинцы"
-      },
-      {
-        id: "bashkirs",
-        name: "Башкиры"
-      },
-      {
-        id: "chuvashs",
-        name: "Чувашы"
-      },
-      {
-        id: "chechens",
-        name: "Чеченцы"
-      },
-      {
-        id: "armenians",
-        name: "Армяне"
-      },
-      {
-        id: "avars",
-        name: "Аварцы"
-      },
-      {
-        id: "mordvins",
-        name: "Мордвины"
-      },
-      {
-        id: "unknown",
-        name: "Не знаю"
-      }
-    ]
+    options: {
+      genders: [
+        {
+          id: "male",
+          name: "Мужской"
+        },
+        {
+          id: "female",
+          name: "Женский"
+        }
+      ],
+      yesno: [
+        {
+          id: true,
+          name: "Да"
+        },
+        {
+          id: false,
+          name: "Нет"
+        }
+      ],
+      enhnicities: [
+        {
+          id: "russians",
+          name: "Русские"
+        },
+        {
+          id: "tatars",
+          name: "Татары"
+        },
+        {
+          id: "ukrainians",
+          name: "Украинцы"
+        },
+        {
+          id: "bashkirs",
+          name: "Башкиры"
+        },
+        {
+          id: "chuvashs",
+          name: "Чувашы"
+        },
+        {
+          id: "chechens",
+          name: "Чеченцы"
+        },
+        {
+          id: "armenians",
+          name: "Армяне"
+        },
+        {
+          id: "avars",
+          name: "Аварцы"
+        },
+        {
+          id: "mordvins",
+          name: "Мордвины"
+        },
+        {
+          id: "unknown",
+          name: "Не знаю"
+        }
+      ]
+    }
   }),
   methods: {
     createSurvey() {
@@ -195,3 +278,10 @@ export default {
   }
 };
 </script>
+
+<style lang="sass" scoped>
+.main-button
+  padding: 10px 20px
+  font-size: 18px
+  margin-left: 20px
+</style>
