@@ -6,18 +6,24 @@
     <table>
       <thead>
         <tr class="cell">
-          <th>№ кандидата</th>
           <th>ФИО</th>
-          <th>Статус</th>
           <th>Дата создания</th>
           <th>Дата редактирования</th>
+          <th>Статус</th>
         </tr>
         <tr v-for="questionnaire in questionnaires" :key="questionnaire.id" class="cell">
-          <td class="nonTextInCell">{{questionnaire.id}}</td>
-          <td class="textInCell">{{questionnaire.name}}</td>
-          <td class="textInCell">{{questionnaire.status}}</td>
+          <td class="textInCell">
+            <router-link
+              to="/questionnaires/edit"
+            >{{questionnaire.questionary.last_name}} {{questionnaire.questionary.first_name}} {{questionnaire.questionary.second_name}}</router-link>
+          </td>
           <td class="nonTextInCell">{{questionnaire.created_date}}</td>
-          <td class="nonTextInCell">{{questionnaire.modyfied_date}}</td>
+          <td class="nonTextInCell">{{questionnaire.modified_date}}</td>
+          <td class="textInCell">
+            <b
+              v-if="questionnaire.questionary_status"
+            >{{statuses[questionnaire.questionary_status.status]}}</b>
+          </td>
         </tr>
       </thead>
     </table>
@@ -25,6 +31,7 @@
 </template>
 
 <script>
+import axios from "axios";
 // @ is an alias to /src
 import Menu from "@/components/Menu.vue";
 import Header from "@/components/Header.vue";
@@ -32,31 +39,22 @@ import Header from "@/components/Header.vue";
 export default {
   name: "questionnaire",
   data: () => ({
-    questionnaires: [
-      {
-        id: "1",
-        name: "Васька",
-        status: "Уточняется",
-        created_date: "2011-9-31",
-        modyfied_date: "2011-9-31"
-      },
-      {
-        id: "2",
-        name: "Мурка",
-        status: "Заполнена",
-        created_date: "2011-9-31",
-        modyfied_date: "2011-9-31"
-      },
-      {
-        id: "3",
-        name: "Васька",
-        status: "Создана",
-        created_date: "2011-9-31",
-        modyfied_date: "2011-9-31"
-      }
+    questionnaires: [],
+    statuses: [
+      "Заполнен",
+      "Отправлен на перезаполнение",
+      "Подтверждён",
+      "Отклонён"
     ]
   }),
-  components: { Menu, Header }
+  components: { Menu, Header },
+  created() {
+    axios
+      .get("http://192.168.0.120:8000/api/questionary/questionaries/")
+      .then(response => {
+        this.questionnaires = response.data;
+      });
+  }
 };
 </script>
 

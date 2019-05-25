@@ -2,10 +2,12 @@
   <div class="home">
     <Header/>
     <Menu/>
-    <h1>Редактирование анкеты</h1>
+    <h1>Редактирование набора полей онлайн-опросника</h1>
     <div>
-      <textarea-field label="Шаблон в формате html + vue"></textarea-field>
+      <textarea-field label="Набор полей в формате JSON"></textarea-field>
+      <textarea-field label="Набор справочников в формате JSON"></textarea-field>
     </div>
+    <button class="main-button" @click="createSurvey()">Сохранить набор полей</button>
   </div>
 </template>
 

@@ -265,7 +265,10 @@ export default {
   methods: {
     createSurvey() {
       axios
-        .post("/address/", this.survey)
+        .post(
+          "http://192.168.0.120:8000/api/questionary/questionaries/",
+          this.survey
+        )
         .then(response => {
           console.log("response: ", response);
           this.$router.push({ name: "submittedSurvey" });
