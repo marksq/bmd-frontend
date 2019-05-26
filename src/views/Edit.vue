@@ -57,7 +57,8 @@ export default {
     axios
       .get(
         "http://192.168.0.104:8000/api/questionary/questionaries/" +
-          this.$route.params.id
+          this.$route.params.id +
+          "/"
       )
       .then(response => {
         this.survey = response.data.questionary;

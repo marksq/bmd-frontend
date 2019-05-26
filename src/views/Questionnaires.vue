@@ -14,7 +14,7 @@
         <tr v-for="questionnaire in questionnaires" :key="questionnaire.id" class="cell">
           <td class="textInCell">
             <router-link
-              to="/questionnaires/edit"
+              :to="{name:'QuestionnaireView', params: { id: questionnaire.id }}"
             >{{questionnaire.questionary.last_name}} {{questionnaire.questionary.first_name}} {{questionnaire.questionary.second_name}}</router-link>
           </td>
           <td class="nonTextInCell">{{questionnaire.created_date}}</td>
