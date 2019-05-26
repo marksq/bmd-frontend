@@ -8,6 +8,7 @@ import QuestionnaireEdit from "./views/QuestionnaireEdit.vue";
 import QuestionnaireView from "./views/QuestionnaireView.vue";
 import TemplateEdit from "./views/TemplateEdit.vue";
 import Edit from "./views/Edit.vue";
+import Auth from "./views/Auth.vue";
 
 Vue.use(Router);
 
@@ -17,6 +18,11 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Auth
     },
     {
       path: "/edit/:id",
