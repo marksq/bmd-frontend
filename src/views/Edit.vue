@@ -268,7 +268,7 @@ export default {
   created() {
     axios
       .get(
-        "http://192.168.0.120:8000/api/questionary/questionaries/" +
+        "http://192.168.0.104:8000/api/questionary/questionaries/" +
           this.$route.params.id
       )
       .then(response => {
@@ -280,7 +280,7 @@ export default {
     createSurvey() {
       axios
         .put(
-          "http://192.168.0.120:8000/api/questionary/questionaries/" +
+          "http://192.168.0.104:8000/api/questionary/questionaries/" +
             this.$route.params.id +
             "/",
           {

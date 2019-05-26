@@ -26,11 +26,15 @@ export default {
     Header
   },
   data: () => ({
-    cred: {}
+    cred: {},
+    token: "123456654321"
   }),
   created() {},
   methods: {
-    auth() {}
+    auth() {
+      localStorage.setItem("token", this.token);
+      this.$router.push("/questionnaires");
+    }
   }
 };
 </script>

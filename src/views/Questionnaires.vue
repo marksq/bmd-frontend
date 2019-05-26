@@ -50,7 +50,7 @@ export default {
   components: { Menu, Header },
   created() {
     axios
-      .get("http://192.168.0.120:8000/api/questionary/questionaries/")
+      .get("http://192.168.0.104:8000/api/questionary/questionaries/")
       .then(response => {
         this.questionnaires = response.data;
       });

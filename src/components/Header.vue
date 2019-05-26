@@ -2,14 +2,27 @@
   <div class="header">
     Карельский регистр неродственных доноров гемопоэтических стволовых клеток
     <div class="auth">
-      <router-link class="auth-link" to="/login">Войти</router-link>
+      <button v-if="token" @click="exit()">Выйти</button>
+      <router-link v-else class="auth-link" to="/login">Войти</router-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  data: () => ({
+    token: undefined
+  }),
+  created() {
+    this.token = localStorage.getItem("token");
+  },
+  methods: {
+    exit() {
+      localStorage.removeItem("token");
+      this.$router.push("/");
+    }
+  }
 };
 </script>
 

@@ -45,16 +45,17 @@ export default {
   }),
   created() {
     axios
-      .get("http://192.168.0.120:8000/api/questionary/questionary-fields/1/")
+      .get("http://192.168.0.104:8000/api/questionary/questionary-fields/1/")
       .then(response => {
         this.fields = response.data.fields;
         this.options = response.data.options;
       });
+    console.log(123, localStorage.getItem("token"));
   },
   methods: {
     createSurvey() {
       axios
-        .post("http://192.168.0.120:8000/api/questionary/questionaries/", {
+        .post("http://192.168.0.104:8000/api/questionary/questionaries/", {
           questionary: this.survey
         })
         .then(response => {

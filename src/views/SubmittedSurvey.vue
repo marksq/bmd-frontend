@@ -12,8 +12,8 @@
       <p>
         Ссылка на вашу анкету:
         <a
-          href="http://192.168.0.120:8000/api/questionary/questionaries/"
-        >http://192.168.0.120:8000/api/questionary/questionaries/</a>
+          href="http://192.168.0.104:8000/api/questionary/questionaries/"
+        >http://192.168.0.104:8000/api/questionary/questionaries/</a>
       </p>
     </div>
   </div>
