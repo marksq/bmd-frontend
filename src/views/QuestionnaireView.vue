@@ -107,8 +107,8 @@ export default {
     editStatus() {
       axios
         .put(
-          "http://192.168.0.104:8000/api/questionary/questionary-statuses/" +
-            this.$route.params.id +
+          "http://192.168.0.104:8000/api/questionary/questionary-status/" +
+            this.status.id +
             "/",
           this.status
         )
@@ -144,4 +144,10 @@ export default {
     display: none !important
   .print
     display: inherit !important
+
+.padding
+  padding-left: 20px
+
+.right
+  float: right
 </style>
