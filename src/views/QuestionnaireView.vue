@@ -28,7 +28,6 @@
       <button class="right" @click="printDocs()">Распечатать набор документов</button>
     </div>
     <div class="print">
-      Только это будет видно на печати
       <div v-for="document in documents" :key="document.id" v-html="document.template"></div>
     </div>
   </div>
@@ -119,6 +118,9 @@ export default {
         .catch(error => {
           console.log("error: ", error);
         });
+    },
+    printDocs() {
+      print();
     }
   }
 };
