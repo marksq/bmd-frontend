@@ -5,7 +5,7 @@ import Questionnaires from "./views/Questionnaires.vue";
 import SubmittedSurvey from "./views/SubmittedSurvey.vue";
 import TemplatesDesigner from "./views/TemplatesDesigner.vue";
 import QuestionnaireEdit from "./views/QuestionnaireEdit.vue";
-import WithComments from "./views/WithComments.vue";
+import QuestionnaireView from "./views/QuestionnaireView.vue";
 import TemplateEdit from "./views/TemplateEdit.vue";
 import Edit from "./views/Edit.vue";
 
@@ -39,11 +39,6 @@ export default new Router({
       component: TemplateEdit
     },
     {
-      path: "/questionnaire",
-      name: "questionnaire",
-      component: WithComments
-    },
-    {
       path: "/submitted",
       name: "submittedSurvey",
       component: SubmittedSurvey
@@ -52,6 +47,11 @@ export default new Router({
       path: "/questionnary-edit",
       name: "QuestionnaryEdit",
       component: QuestionnaireEdit
+    },
+    {
+      path: "/questionnaires/edit",
+      name: "QuestionnaireView",
+      component: QuestionnaireView
     },
     {
       path: "/about",
