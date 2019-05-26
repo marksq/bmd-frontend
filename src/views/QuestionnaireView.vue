@@ -3,18 +3,29 @@
     <div class="no-print">
       <Header/>
       <h1>Анкета кандидата в доноры</h1>
-      <h2>Комментарий сотрудника регистра</h2>
-      <div>
-        <textarea-field>Вам нужно исправить поля такие-то и такие-то.</textarea-field>
-        <button @click="changeStatus()">Серёга сказал тут нужна кнопка</button>
-      </div>
       <div v-for="field in fields" :key="field.key">
         <h2 v-if="field.type == 'header'">{{field.label}}</h2>
         <h3 v-if="field.type == 'subheader'">{{field.label}}</h3>
-        <property v-if="field.type == 'text'" :label="field.label" :content="survey[field.key]"/>
-        <property v-if="field.type == 'radio'" :label="field.label" :v-model="survey[field.key]"/>
+        <property
+          class="padding"
+          v-if="field.type == 'text'"
+          :label="field.label"
+          :content="survey[field.key]"
+        />
+        <property
+          class="padding"
+          v-if="field.type == 'radio'"
+          :label="field.label"
+          :v-model="survey[field.key]"
+        />
       </div>
-      <button class="main-button" @click="createSurvey()">Отправить анкету</button>
+      <h2>Поля для заполнения сотрудником регистра</h2>
+      <div>
+        <textarea-field label="Комментарий" v-model="status.comment"></textarea-field>
+        <radio-field label="Статус" v-model="status.status" :options="statuses"/>
+      </div>
+      <button class="main-button" @click="editStatus()">Внести изменения</button>
+      <button class="right" @click="printDocs()">Распечатать набор документов</button>
     </div>
     <div class="print">
       Только это будет видно на печати
@@ -44,7 +55,29 @@ export default {
     fields: [],
     survey: {},
     options: {},
-    documents: []
+    documents: [],
+    status: {
+      comment: "",
+      status: ""
+    },
+    statuses: [
+      {
+        id: 0,
+        name: "Заполнен"
+      },
+      {
+        id: 1,
+        name: "Отправлен на перезаполнение"
+      },
+      {
+        id: 2,
+        name: "Подтверждён"
+      },
+      {
+        id: 3,
+        name: "Отклонён"
+      }
+    ]
   }),
   created() {
     axios
@@ -53,6 +86,7 @@ export default {
         this.fields = response.data.fields;
         this.options = response.data.options;
       });
+
     axios
       .get("http://192.168.0.104:8000/api/questionary/document-templates/")
       .then(response => {
@@ -66,20 +100,24 @@ export default {
       )
       .then(response => {
         this.survey = response.data.questionary;
-        this.comment = response.data.questionary_status;
+        this.status = response.data.questionary_status;
       });
   },
   methods: {
-    createSurvey() {
+    editStatus() {
       axios
-        .post("/address/", this.survey)
+        .put(
+          "http://192.168.0.104:8000/api/questionary/questionary-statuses/" +
+            this.$route.params.id +
+            "/",
+          this.status
+        )
         .then(response => {
           console.log("response: ", response);
-          this.$router.push({ name: "submittedSurvey" });
+          this.$router.push({ name: "Questionnaires" });
         })
         .catch(error => {
           console.log("error: ", error);
-          this.$router.push({ name: "submittedSurvey" });
         });
     }
   }
@@ -95,6 +133,7 @@ export default {
   font-size: 18px
   margin-left: 20px
 
+<<<<<<< HEAD
 
 @media print
   .no-print, .no-print *
@@ -102,4 +141,11 @@ export default {
   .print
     display: inherit !important
 
+=======
+.padding
+  padding-left: 20px
+
+.right
+  float: right
+>>>>>>> 907cdcf3c5c2ba15544a452b4716dc6829cdc066
 </style>
