@@ -3,8 +3,8 @@
     <Header/>
     <h1>Вход в систему</h1>
     <div>
-      <text-field label="Логин" v-model="auth.login" :required="true"/>
-      <text-field label="Пароль" v-model="auth.login" :required="true"/>
+      <text-field label="Логин" v-model="cred.login" :required="true"/>
+      <text-field label="Пароль" v-model="cred.password" :required="true"/>
     </div>
     <button class="main-button" @click="auth()">Войти в систему</button>
   </div>
@@ -26,7 +26,7 @@ export default {
     Header
   },
   data: () => ({
-    auth: {}
+    cred: {}
   }),
   created() {},
   methods: {
