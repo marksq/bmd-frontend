@@ -7,6 +7,7 @@ import TemplatesDesigner from "./views/TemplatesDesigner.vue";
 import QuestionnaireEdit from "./views/QuestionnaireEdit.vue";
 import QuestionnaireView from "./views/QuestionnaireView.vue";
 import TemplateEdit from "./views/TemplateEdit.vue";
+import TemplateAdd from "./views/TemplateAdd.vue";
 import Edit from "./views/Edit.vue";
 import Auth from "./views/Auth.vue";
 
@@ -40,9 +41,14 @@ export default new Router({
       component: TemplatesDesigner
     },
     {
-      path: "/template-edit/",
+      path: "/template-edit/:id/",
       name: "TemplateEdit",
       component: TemplateEdit
+    },
+    {
+      path: "/template-add/",
+      name: "TemplateAdd",
+      component: TemplateAdd
     },
     {
       path: "/submitted/:id/",

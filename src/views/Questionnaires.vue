@@ -27,6 +27,9 @@
         </tr>
       </thead>
     </table>
+
+    <button @click="removeApproved()">Удалить все подтверждённые</button>
+    <button @click="removeRejected()">Удалить все отклонённые</button>
   </div>
 </template>
 
@@ -54,6 +57,22 @@ export default {
       .then(response => {
         this.questionnaires = response.data;
       });
+  },
+  methods: {
+    removeApproved() {
+      axios
+        .delete("http://192.168.0.104:8000/api/questionary/delete-accepted/")
+        .then(response => {
+          this.$router.push({ name: "Questionnaires" });
+        });
+    },
+    removeRejected() {
+      axios
+        .delete("http://192.168.0.104:8000/api/questionary/delete-rejected/")
+        .then(response => {
+          this.$router.push({ name: "Questionnaires" });
+        });
+    }
   }
 };
 </script>
