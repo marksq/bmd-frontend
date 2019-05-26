@@ -9,7 +9,12 @@
         требует правок, мы сообщим об этом, если не требует — договоримся о
         визите в офис для подписания документов.
       </p>
-      <p>Ссылка на вашу анкету: http://address//</p>
+      <p>
+        Ссылка на вашу анкету:
+        <a
+          href="http://192.168.0.120:8000/api/questionary/questionaries/"
+        >http://192.168.0.120:8000/api/questionary/questionaries/</a>
+      </p>
     </div>
   </div>
 </template>
@@ -21,61 +26,7 @@ import Header from "@/components/Header.vue";
 export default {
   name: "home",
   components: { Header },
-  data: () => ({
-    survey: {},
-    genders: [
-      {
-        id: "male",
-        name: "Мужской"
-      },
-      {
-        id: "female",
-        name: "Женский"
-      }
-    ],
-    enhnicities: [
-      {
-        id: "russians",
-        name: "Русские"
-      },
-      {
-        id: "tatars",
-        name: "Татары"
-      },
-      {
-        id: "ukrainians",
-        name: "Украинцы"
-      },
-      {
-        id: "bashkirs",
-        name: "Башкиры"
-      },
-      {
-        id: "chuvashs",
-        name: "Чувашы"
-      },
-      {
-        id: "chechens",
-        name: "Чеченцы"
-      },
-      {
-        id: "armenians",
-        name: "Армяне"
-      },
-      {
-        id: "avars",
-        name: "Аварцы"
-      },
-      {
-        id: "mordvins",
-        name: "Мордвины"
-      },
-      {
-        id: "unknown",
-        name: "Не знаю"
-      }
-    ]
-  }),
+  data: () => ({}),
   methods: {
     createSurvey() {
       axios

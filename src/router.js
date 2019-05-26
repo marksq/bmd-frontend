@@ -7,6 +7,7 @@ import TemplatesDesigner from "./views/TemplatesDesigner.vue";
 import QuestionnaireEdit from "./views/QuestionnaireEdit.vue";
 import WithComments from "./views/WithComments.vue";
 import TemplateEdit from "./views/TemplateEdit.vue";
+import Edit from "./views/Edit.vue";
 
 Vue.use(Router);
 
@@ -16,6 +17,11 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/edit/:id",
+      name: "Edit",
+      component: Edit
     },
     {
       path: "/questionnaires",
