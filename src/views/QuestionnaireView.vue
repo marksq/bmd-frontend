@@ -1,20 +1,25 @@
 <template>
   <div class="home">
-    <Header/>
-    <h1>Анкета кандидата в доноры</h1>
-    <h2>Комментарий сотрудника регистра</h2>
-
-    <div>
-      <textarea-field>Вам нужно исправить поля такие-то и такие-то.</textarea-field>
-      <button @click="changeStatus()">Серёга сказал тут нужна кнопка</button>
+    <div class="no-print">
+      <Header/>
+      <h1>Анкета кандидата в доноры</h1>
+      <h2>Комментарий сотрудника регистра</h2>
+      <div>
+        <textarea-field>Вам нужно исправить поля такие-то и такие-то.</textarea-field>
+        <button @click="changeStatus()">Серёга сказал тут нужна кнопка</button>
+      </div>
+      <div v-for="field in fields" :key="field.key">
+        <h2 v-if="field.type == 'header'">{{field.label}}</h2>
+        <h3 v-if="field.type == 'subheader'">{{field.label}}</h3>
+        <property v-if="field.type == 'text'" :label="field.label" :content="survey[field.key]"/>
+        <property v-if="field.type == 'radio'" :label="field.label" :v-model="survey[field.key]"/>
+      </div>
+      <button class="main-button" @click="createSurvey()">Отправить анкету</button>
     </div>
-    <div v-for="field in fields" :key="field.key">
-      <h2 v-if="field.type == 'header'">{{field.label}}</h2>
-      <h3 v-if="field.type == 'subheader'">{{field.label}}</h3>
-      <property v-if="field.type == 'text'" :label="field.label" :content="survey[field.key]"/>
-      <property v-if="field.type == 'radio'" :label="field.label" :v-model="survey[field.key]"/>
+    <div class="print">
+      Только это будет видно на печати
+      <div v-for="document in documents" :key="document.id">{{document.template}}</div>
     </div>
-    <button class="main-button" @click="createSurvey()">Отправить анкету</button>
   </div>
 </template>
 
@@ -38,7 +43,8 @@ export default {
   data: () => ({
     fields: [],
     survey: {},
-    options: {}
+    options: {},
+    documents: []
   }),
   created() {
     axios
@@ -46,6 +52,11 @@ export default {
       .then(response => {
         this.fields = response.data.fields;
         this.options = response.data.options;
+      });
+    axios
+      .get("http://192.168.0.104:8000/api/questionary/document-templates/")
+      .then(response => {
+        this.documents = response.data;
       });
     axios
       .get(
@@ -76,8 +87,19 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.print
+ display: none
+
 .main-button
   padding: 10px 20px
   font-size: 18px
   margin-left: 20px
+
+
+@media print
+  .no-print, .no-print *
+    display: none !important
+  .print
+    display: inherit !important
+
 </style>
