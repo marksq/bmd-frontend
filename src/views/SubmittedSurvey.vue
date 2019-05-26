@@ -20,9 +20,7 @@ import Header from "@/components/Header.vue";
 export default {
   name: "home",
   components: { Header },
-  data: () => ({
-    id: this.$route.params.id
-  }),
+  data: () => ({}),
   methods: {
     createSurvey() {
       axios
