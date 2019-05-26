@@ -9,12 +9,6 @@
         требует правок, мы сообщим об этом, если не требует — договоримся о
         визите в офис для подписания документов.
       </p>
-      <p>
-        Ссылка на вашу анкету:
-        <a
-          href="http://192.168.0.106:8080/#/edit/4df4709a-73e7-44f3-b9a4-9eef0fff584f"
-        >http://192.168.0.106:8080/#/edit/4df4709a-73e7-44f3-b9a4-9eef0fff584f</a>
-      </p>
     </div>
   </div>
 </template>
@@ -26,7 +20,9 @@ import Header from "@/components/Header.vue";
 export default {
   name: "home",
   components: { Header },
-  data: () => ({}),
+  data: () => ({
+    id: this.$route.params.id
+  }),
   methods: {
     createSurvey() {
       axios
