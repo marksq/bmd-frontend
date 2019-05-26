@@ -68,14 +68,14 @@ export default {
       axios
         .delete("http://192.168.0.104:8000/api/questionary/delete-accepted/")
         .then(() => {
-          this.$router.push({ name: "Questionnaires" });
+          this.$router.go();
         });
     },
     removeRejected() {
       axios
         .delete("http://192.168.0.104:8000/api/questionary/delete-rejected/")
         .then(() => {
-          this.$router.push({ name: "Questionnaires" });
+          this.$router.go();
         });
     }
   }
