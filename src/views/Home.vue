@@ -55,7 +55,8 @@ export default {
     createSurvey() {
       axios
         .post("http://192.168.0.104:8000/api/questionary/questionaries/", {
-          questionary: this.survey
+          questionary: this.survey,
+          email: this.survey.email
         })
         .then(response => {
           console.log("response: ", response);

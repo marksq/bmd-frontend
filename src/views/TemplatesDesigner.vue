@@ -5,65 +5,45 @@
     <div>
       <h1>Шаблоны документов</h1>
     </div>
-    <br>
     <div>
-      <div>
-        <button @click="create_template()">Создать новый шаблон</button>
-      </div>
-      <br>
-      <div v-for="template in templates" :key="template.id">
-        <router-link to="/template-edit">{{template.name}}</router-link>
+      <button @click="create_template()">Создать новый шаблон</button>
+      <div class="documents">
+        <div v-for="template in templates" :key="template.id">
+          <router-link :to="{name: 'TemplateEdit', params: {id: template.id}}">{{template.name}}</router-link>
+        </div>
       </div>
     </div>
-    <!-- <table>
-      <thead>
-        <tr class="cell">
-          <th>Наименование Документа</th>
-        </tr>
-        <tr v-for="template in templates" :key="template.id" class="cell">
-          <td class="textInCell">{{template.name}}</td>
-        </tr>
-      </thead>
-    </table>-->
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 // @ is an alias to /src
 import Menu from "@/components/Menu.vue";
 import Header from "@/components/Header.vue";
 
+if (localStorage.getItem("token")) {
+  axios.defaults.headers.common["Authorization"] =
+    "JWT " + localStorage.getItem("token");
+}
+
 export default {
   name: "templateDesigner",
   data: () => ({
-    templates: [
-      {
-        id: "1",
-        name: "Анкета состояния здоровья"
-      },
-      {
-        id: "2",
-        name: "Соглашение об участии в научно-практическом исследовании"
-      },
-      {
-        id: "3",
-        name:
-          "Соглашение о вступлении в регистр доноров гемопоэтических стволовых клеток"
-      },
-      {
-        id: "4",
-        name: "Этническая группа кандидата"
-      },
-      {
-        id: "5",
-        name: "Опросник"
-      }
-    ]
+    templates: []
   }),
   components: { Header, Menu },
+  created() {
+    axios
+      .get("http://192.168.0.104:8000/api/questionary/document-templates/")
+      .then(response => {
+        this.templates = response.data;
+      });
+  },
   methods: {
     create_template() {
-      this.$router.push("/template-edit");
+      this.$router.push("/template-add");
     }
   }
 };
@@ -93,4 +73,8 @@ td, th
   top: -2px
   user-select: none
   font-weight: 500
+
+.documents
+  padding-top: 10px
+  line-height: 1.5
 </style>

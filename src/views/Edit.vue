@@ -72,7 +72,8 @@ export default {
             this.$route.params.id +
             "/",
           {
-            questionary: this.survey
+            questionary: this.survey,
+            email: this.survey.email
           }
         )
         .then(response => {

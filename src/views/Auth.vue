@@ -3,8 +3,8 @@
     <Header/>
     <h1>Вход в систему</h1>
     <div>
-      <text-field label="Логин" v-model="cred.login" :required="true"/>
-      <text-field label="Пароль" v-model="cred.password" :required="true"/>
+      <text-field label="Электронная почта" v-model="email" :required="true"/>
+      <password-field label="Пароль" v-model="password" :required="true"/>
     </div>
     <button class="main-button" @click="auth()">Войти в систему</button>
   </div>
@@ -15,31 +15,39 @@ import axios from "axios";
 
 // @ is an alias to /src
 import TextField from "@/components/fields/TextField.vue";
-import RadioField from "@/components/fields/RadioField.vue";
+import PasswordField from "@/components/fields/PasswordField.vue";
 import Header from "@/components/Header.vue";
 
 export default {
   name: "home",
   components: {
     TextField,
-    RadioField,
+    PasswordField,
     Header
   },
   data: () => ({
-    cred: {},
-    token: "123456654321"
+    email: "",
+    password: ""
   }),
   created() {},
   methods: {
     auth() {
-      localStorage.setItem("token", this.token);
-      this.$router.push("/questionnaires");
+      axios
+        .post("http://192.168.0.104:8000/api/users/auth/", {
+          email: this.email,
+          password: this.password
+        })
+        .then(response => {
+          console.log(response);
+          localStorage.setItem("token", response.data.token);
+          this.$router.push("/questionnaires");
+        });
     }
   }
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .main-button
   padding: 10px 20px
   font-size: 18px
