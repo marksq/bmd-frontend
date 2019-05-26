@@ -50,7 +50,6 @@ export default {
         this.fields = response.data.fields;
         this.options = response.data.options;
       });
-    console.log(123, localStorage.getItem("token"));
   },
   methods: {
     createSurvey() {
