@@ -39,6 +39,11 @@ import axios from "axios";
 import Menu from "@/components/Menu.vue";
 import Header from "@/components/Header.vue";
 
+if (localStorage.getItem("token")) {
+  axios.defaults.headers.common["Authorization"] =
+    "JWT " + localStorage.getItem("token");
+}
+
 export default {
   name: "questionnaire",
   data: () => ({
@@ -62,14 +67,14 @@ export default {
     removeApproved() {
       axios
         .delete("http://192.168.0.104:8000/api/questionary/delete-accepted/")
-        .then(response => {
+        .then(() => {
           this.$router.push({ name: "Questionnaires" });
         });
     },
     removeRejected() {
       axios
         .delete("http://192.168.0.104:8000/api/questionary/delete-rejected/")
-        .then(response => {
+        .then(() => {
           this.$router.push({ name: "Questionnaires" });
         });
     }

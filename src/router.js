@@ -61,7 +61,7 @@ export default new Router({
       component: QuestionnaireEdit
     },
     {
-      path: "/questionnaires/edit/",
+      path: "/questionnaires/edit/:id/",
       name: "QuestionnaireView",
       component: QuestionnaireView
     },
