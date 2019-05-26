@@ -20,42 +20,42 @@ export default new Router({
       component: Home
     },
     {
-      path: "/login",
+      path: "/login/",
       name: "login",
       component: Auth
     },
     {
-      path: "/edit/:id",
+      path: "/edit/:id/",
       name: "Edit",
       component: Edit
     },
     {
-      path: "/questionnaires",
+      path: "/questionnaires/",
       name: "Questionnaires",
       component: Questionnaires
     },
     {
-      path: "/templates-designer",
+      path: "/templates-designer/",
       name: "TemplatesDesigner",
       component: TemplatesDesigner
     },
     {
-      path: "/template-edit",
+      path: "/template-edit/",
       name: "TemplateEdit",
       component: TemplateEdit
     },
     {
-      path: "/submitted/:id",
+      path: "/submitted/:id/",
       name: "submittedSurvey",
       component: SubmittedSurvey
     },
     {
-      path: "/questionnary-edit",
+      path: "/questionnary-edit/",
       name: "QuestionnaryEdit",
       component: QuestionnaireEdit
     },
     {
-      path: "/questionnaires/edit",
+      path: "/questionnaires/edit/",
       name: "QuestionnaireView",
       component: QuestionnaireView
     },
