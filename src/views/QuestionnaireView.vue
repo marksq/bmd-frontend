@@ -3,8 +3,10 @@
     <Header/>
     <h1>Анкета кандидата в доноры</h1>
     <h2>Комментарий сотрудника регистра</h2>
+
     <div>
-      <p>Вам нужно исправить поля такие-то и такие-то.</p>
+      <textarea-field>Вам нужно исправить поля такие-то и такие-то.</textarea-field>
+      <button @click="changeStatus()">Серёга сказал тут нужна кнопка</button>
     </div>
     <div v-for="field in fields" :key="field.key">
       <h2 v-if="field.type == 'header'">{{field.label}}</h2>
@@ -21,14 +23,14 @@ import axios from "axios";
 
 // @ is an alias to /src
 import Property from "@/components/Property.vue";
-import TextField from "@/components/fields/TextField.vue";
+import TextareaField from "@/components/fields/TextareaField.vue";
 import RadioField from "@/components/fields/RadioField.vue";
 import Header from "@/components/Header.vue";
 
 export default {
   name: "home",
   components: {
-    TextField,
+    TextareaField,
     RadioField,
     Header,
     Property
