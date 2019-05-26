@@ -36,6 +36,8 @@
 <script>
 import axios from "axios";
 
+import VRuntimeTemplate from "v-runtime-template";
+
 // @ is an alias to /src
 import Property from "@/components/Property.vue";
 import TextareaField from "@/components/fields/TextareaField.vue";
@@ -48,7 +50,8 @@ export default {
     TextareaField,
     RadioField,
     Header,
-    Property
+    Property,
+    VRuntimeTemplate
   },
   data: () => ({
     fields: [],

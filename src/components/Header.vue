@@ -2,8 +2,9 @@
   <div class="header">
     Карельский регистр неродственных доноров гемопоэтических стволовых клеток
     <div class="auth">
+      <router-link v-if="token" class="auth-link" to="/questionnaires">Панель администрирования</router-link>&nbsp;
       <button v-if="token" @click="exit()">Выйти</button>
-      <router-link v-else class="auth-link" to="/login">Войти</router-link>
+      <router-link v-if="!token" class="auth-link" to="/login">Войти</router-link>
     </div>
   </div>
 </template>
