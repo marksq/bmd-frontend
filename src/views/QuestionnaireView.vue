@@ -29,7 +29,7 @@
     </div>
     <div class="print">
       Только это будет видно на печати
-      <div v-for="document in documents" :key="document.id">{{document.template}}</div>
+      <div v-for="document in documents" :key="document.id" v-html="document.template"></div>
     </div>
   </div>
 </template>
@@ -133,19 +133,15 @@ export default {
   font-size: 18px
   margin-left: 20px
 
-<<<<<<< HEAD
+.padding
+  padding-left: 20px
+
+.right
+  float: right
 
 @media print
   .no-print, .no-print *
     display: none !important
   .print
     display: inherit !important
-
-=======
-.padding
-  padding-left: 20px
-
-.right
-  float: right
->>>>>>> 907cdcf3c5c2ba15544a452b4716dc6829cdc066
 </style>
