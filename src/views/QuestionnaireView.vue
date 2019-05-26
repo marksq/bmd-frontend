@@ -1,30 +1,36 @@
 <template>
   <div class="home">
-    <Header/>
-    <h1>Анкета кандидата в доноры</h1>
-    <div v-for="field in fields" :key="field.key">
-      <h2 v-if="field.type == 'header'">{{field.label}}</h2>
-      <h3 v-if="field.type == 'subheader'">{{field.label}}</h3>
-      <property
-        class="padding"
-        v-if="field.type == 'text'"
-        :label="field.label"
-        :content="survey[field.key]"
-      />
-      <property
-        class="padding"
-        v-if="field.type == 'radio'"
-        :label="field.label"
-        :v-model="survey[field.key]"
-      />
+    <div class="no-print">
+      <Header/>
+      <h1>Анкета кандидата в доноры</h1>
+      <div v-for="field in fields" :key="field.key">
+        <h2 v-if="field.type == 'header'">{{field.label}}</h2>
+        <h3 v-if="field.type == 'subheader'">{{field.label}}</h3>
+        <property
+          class="padding"
+          v-if="field.type == 'text'"
+          :label="field.label"
+          :content="survey[field.key]"
+        />
+        <property
+          class="padding"
+          v-if="field.type == 'radio'"
+          :label="field.label"
+          :v-model="survey[field.key]"
+        />
+      </div>
+      <h2>Поля для заполнения сотрудником регистра</h2>
+      <div>
+        <textarea-field label="Комментарий" v-model="status.comment"></textarea-field>
+        <radio-field label="Статус" v-model="status.status" :options="statuses"/>
+      </div>
+      <button class="main-button" @click="editStatus()">Внести изменения</button>
+      <button class="right" @click="printDocs()">Распечатать набор документов</button>
     </div>
-    <h2>Поля для заполнения сотрудником регистра</h2>
-    <div>
-      <textarea-field label="Комментарий" v-model="status.comment"></textarea-field>
-      <radio-field label="Статус" v-model="status.status" :options="statuses"/>
+    <div class="print">
+      Только это будет видно на печати
+      <div v-for="document in documents" :key="document.id">{{document.template}}</div>
     </div>
-    <button class="main-button" @click="editStatus()">Внести изменения</button>
-    <button class="right" @click="printDocs()">Распечатать набор документов</button>
   </div>
 </template>
 
@@ -49,6 +55,7 @@ export default {
     fields: [],
     survey: {},
     options: {},
+    documents: [],
     status: {
       comment: "",
       status: ""
@@ -80,6 +87,11 @@ export default {
         this.options = response.data.options;
       });
 
+    axios
+      .get("http://192.168.0.104:8000/api/questionary/document-templates/")
+      .then(response => {
+        this.documents = response.data;
+      });
     axios
       .get(
         "http://192.168.0.104:8000/api/questionary/questionaries/" +
@@ -113,14 +125,27 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.print
+ display: none
+
 .main-button
   padding: 10px 20px
   font-size: 18px
   margin-left: 20px
 
+<<<<<<< HEAD
+
+@media print
+  .no-print, .no-print *
+    display: none !important
+  .print
+    display: inherit !important
+
+=======
 .padding
   padding-left: 20px
 
 .right
   float: right
+>>>>>>> 907cdcf3c5c2ba15544a452b4716dc6829cdc066
 </style>
