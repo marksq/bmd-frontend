@@ -60,11 +60,13 @@ export default {
         })
         .then(response => {
           console.log("response: ", response);
-          this.$router.push({ name: "submittedSurvey" });
+          this.$router.push({
+            name: "submittedSurvey",
+            params: { id: response.data.id }
+          });
         })
         .catch(error => {
           console.log("error: ", error);
-          this.$router.push({ name: "submittedSurvey" });
         });
     }
   }

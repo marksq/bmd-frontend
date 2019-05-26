@@ -45,7 +45,7 @@ export default new Router({
       component: TemplateEdit
     },
     {
-      path: "/submitted",
+      path: "/submitted/:id",
       name: "submittedSurvey",
       component: SubmittedSurvey
     },

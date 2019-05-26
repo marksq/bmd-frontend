@@ -4,10 +4,10 @@
     <Menu/>
     <h1>Редактирование набора полей онлайн-опросника</h1>
     <div>
-      <textarea-field label="Набор полей в формате JSON"></textarea-field>
-      <textarea-field label="Набор справочников в формате JSON"></textarea-field>
+      <textarea-field label="Набор полей в формате JSON" v-model="fields"></textarea-field>
+      <textarea-field label="Набор справочников в формате JSON" v-model="options"></textarea-field>
     </div>
-    <button class="main-button" @click="createSurvey()">Сохранить набор полей</button>
+    <button class="main-button" @click="saveFields()">Сохранить набор полей</button>
   </div>
 </template>
 
@@ -25,67 +25,32 @@ export default {
     Header
   },
   data: () => ({
-    survey: {},
-    genders: [
-      {
-        id: "male",
-        name: "Мужской"
-      },
-      {
-        id: "female",
-        name: "Женский"
-      }
-    ],
-    enhnicities: [
-      {
-        id: "russians",
-        name: "Русские"
-      },
-      {
-        id: "tatars",
-        name: "Татары"
-      },
-      {
-        id: "ukrainians",
-        name: "Украинцы"
-      },
-      {
-        id: "bashkirs",
-        name: "Башкиры"
-      },
-      {
-        id: "chuvashs",
-        name: "Чувашы"
-      },
-      {
-        id: "chechens",
-        name: "Чеченцы"
-      },
-      {
-        id: "armenians",
-        name: "Армяне"
-      },
-      {
-        id: "avars",
-        name: "Аварцы"
-      },
-      {
-        id: "mordvins",
-        name: "Мордвины"
-      },
-      {
-        id: "unknown",
-        name: "Не знаю"
-      }
-    ]
+    fields: {},
+    options: {}
   }),
+  created() {
+    axios
+      .get("http://192.168.0.104:8000/api/questionary/questionary-fields/")
+      .then(response => {
+        console.log(response);
+        this.fields = JSON.stringify(response.data[0].fields, null, 2);
+        this.options = JSON.stringify(response.data[0].options, null, 2);
+      });
+  },
   methods: {
-    createSurvey() {
+    saveFields() {
+      let fieldsAndOptions = { fields: {}, options: {} };
+
+      fieldsAndOptions.fields = JSON.parse(this.fields);
+      fieldsAndOptions.options = JSON.parse(this.options);
+
       axios
-        .post("/address/", this.survey)
+        .put(
+          "http://192.168.0.104:8000/api/questionary/questionary-fields/1/",
+          fieldsAndOptions
+        )
         .then(response => {
           console.log("response: ", response);
-          this.$router.push({ name: "approvedSurvey" });
         })
         .catch(error => {
           console.log("error: ", error);

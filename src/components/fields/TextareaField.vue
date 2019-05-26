@@ -7,15 +7,14 @@
     :inline="inline"
     :nopadding="nopadding"
   >
-    <input
+    <textarea
       slot="field"
-      type="textarea"
       :value="value"
       @input="updateValue($event.target.value)"
       :id="uuid"
       :disabled="disabled"
       :class="{inline: inline}"
-    >
+    ></textarea>
     <div slot="desc">
       <slot name="extra"></slot>
     </div>
@@ -56,7 +55,7 @@ export default {
 </script>
 
 <style scoped>
-input {
+textarea {
   border: 1px solid #ccc;
   padding: 7px 0 7px 10px;
   font-family: "Roboto";
