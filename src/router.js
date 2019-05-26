@@ -41,29 +41,17 @@ export default new Router({
       component: TemplatesDesigner
     },
     {
-<<<<<<< HEAD
       path: "/template-edit/:id/",
-=======
-      path: "/template-edit/:id",
->>>>>>> c8cf21ef1c3f05f65189600221d82ca4d4731482
       name: "TemplateEdit",
       component: TemplateEdit
     },
     {
-<<<<<<< HEAD
       path: "/template-add/",
-=======
-      path: "/template-add",
->>>>>>> c8cf21ef1c3f05f65189600221d82ca4d4731482
       name: "TemplateAdd",
       component: TemplateAdd
     },
     {
-<<<<<<< HEAD
       path: "/submitted/:id/",
-=======
-      path: "/submitted/:id",
->>>>>>> c8cf21ef1c3f05f65189600221d82ca4d4731482
       name: "submittedSurvey",
       component: SubmittedSurvey
     },
