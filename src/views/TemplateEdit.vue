@@ -2,7 +2,7 @@
   <div class="home">
     <Header/>
     <Menu/>
-    <h1>Редактирование печатной формы анкеты</h1>
+    <h1>Создание/Редактирование шаблона документа</h1>
     <div>
       <textarea-field label="Описание набора полей в формате JSON"></textarea-field>
     </div>

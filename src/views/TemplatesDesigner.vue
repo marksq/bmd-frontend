@@ -6,18 +6,25 @@
       <h1>Шаблоны документов</h1>
     </div>
     <br>
-    <table>
+    <div>
+      <div>
+        <button @click="create_template()">Создать новый шаблон</button>
+      </div>
+      <br>
+      <div v-for="template in templates" :key="template.id">
+        <router-link to="/template-edit">{{template.name}}</router-link>
+      </div>
+    </div>
+    <!-- <table>
       <thead>
         <tr class="cell">
-          <th>№ анкеты</th>
-          <th>Наименование анкеты</th>
+          <th>Наименование Документа</th>
         </tr>
         <tr v-for="template in templates" :key="template.id" class="cell">
-          <td class="nonTextInCell">{{template.id}}</td>
           <td class="textInCell">{{template.name}}</td>
         </tr>
       </thead>
-    </table>
+    </table>-->
   </div>
 </template>
 
@@ -53,7 +60,12 @@ export default {
       }
     ]
   }),
-  components: { Header, Menu }
+  components: { Header, Menu },
+  methods: {
+    create_template() {
+      this.$router.push("/template-edit");
+    }
+  }
 };
 </script>
 
