@@ -49,14 +49,14 @@ export default {
   }),
   created() {
     axios
-      .get("http://192.168.0.104:8000/api/questionary/questionary-fields/1/")
+      .get("/api/questionary/questionary-fields/1/")
       .then(response => {
         this.fields = response.data.fields;
         this.options = response.data.options;
       });
     axios
       .get(
-        "http://192.168.0.104:8000/api/questionary/questionaries/" +
+        "/api/questionary/questionaries/" +
           this.$route.params.id +
           "/"
       )
@@ -69,7 +69,7 @@ export default {
     createSurvey() {
       axios
         .put(
-          "http://192.168.0.104:8000/api/questionary/questionaries/" +
+          "/api/questionary/questionaries/" +
             this.$route.params.id +
             "/",
           {

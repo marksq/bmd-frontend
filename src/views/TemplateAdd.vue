@@ -39,7 +39,7 @@ export default {
   methods: {
     create() {
       axios
-        .post("http://192.168.0.104:8000/api/questionary/document-templates/", {
+        .post("/api/questionary/document-templates/", {
           template: this.templateHTML,
           name: this.name
         })

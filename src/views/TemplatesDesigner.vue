@@ -36,7 +36,7 @@ export default {
   components: { Header, Menu },
   created() {
     axios
-      .get("http://192.168.0.104:8000/api/questionary/document-templates/")
+      .get("/api/questionary/document-templates/")
       .then(response => {
         this.templates = response.data;
       });

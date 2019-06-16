@@ -30,7 +30,7 @@ export default {
   }),
   created() {
     axios
-      .get("http://192.168.0.104:8000/api/questionary/questionary-fields/")
+      .get("/api/questionary/questionary-fields/")
       .then(response => {
         console.log(response);
         this.fields = JSON.stringify(response.data[0].fields, null, 2);
@@ -46,7 +46,7 @@ export default {
 
       axios
         .put(
-          "http://192.168.0.104:8000/api/questionary/questionary-fields/1/",
+          "/api/questionary/questionary-fields/1/",
           fieldsAndOptions
         )
         .then(response => {

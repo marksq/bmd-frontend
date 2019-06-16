@@ -34,7 +34,7 @@ export default {
   created() {
     axios
       .get(
-        "http://192.168.0.104:8000/api/questionary/document-templates/" +
+        "/api/questionary/document-templates/" +
           this.$route.params.id
       )
       .then(response => {
@@ -46,7 +46,7 @@ export default {
     edit() {
       axios
         .put(
-          "http://192.168.0.104:8000/api/questionary/document-templates/" +
+          "/api/questionary/document-templates/" +
             this.$route.params.id +
             "/",
           {
@@ -65,7 +65,7 @@ export default {
     remove() {
       axios
         .delete(
-          "http://192.168.0.104:8000/api/questionary/document-templates/" +
+          "/api/questionary/document-templates/" +
             this.$route.params.id +
             "/"
         )

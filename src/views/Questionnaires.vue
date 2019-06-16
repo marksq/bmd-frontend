@@ -58,7 +58,7 @@ export default {
   components: { Menu, Header },
   created() {
     axios
-      .get("http://192.168.0.104:8000/api/questionary/questionaries/")
+      .get("/api/questionary/questionaries/")
       .then(response => {
         this.questionnaires = response.data;
       });
@@ -66,14 +66,14 @@ export default {
   methods: {
     removeApproved() {
       axios
-        .delete("http://192.168.0.104:8000/api/questionary/delete-accepted/")
+        .delete("/api/questionary/delete-accepted/")
         .then(() => {
           this.$router.go();
         });
     },
     removeRejected() {
       axios
-        .delete("http://192.168.0.104:8000/api/questionary/delete-rejected/")
+        .delete("/api/questionary/delete-rejected/")
         .then(() => {
           this.$router.go();
         });

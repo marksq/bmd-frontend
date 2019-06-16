@@ -83,20 +83,20 @@ export default {
   }),
   created() {
     axios
-      .get("http://192.168.0.104:8000/api/questionary/questionary-fields/1/")
+      .get("/api/questionary/questionary-fields/1/")
       .then(response => {
         this.fields = response.data.fields;
         this.options = response.data.options;
       });
 
     axios
-      .get("http://192.168.0.104:8000/api/questionary/document-templates/")
+      .get("/api/questionary/document-templates/")
       .then(response => {
         this.documents = response.data;
       });
     axios
       .get(
-        "http://192.168.0.104:8000/api/questionary/questionaries/" +
+        "/api/questionary/questionaries/" +
           this.$route.params.id +
           "/"
       )
@@ -109,7 +109,7 @@ export default {
     editStatus() {
       axios
         .put(
-          "http://192.168.0.104:8000/api/questionary/questionary-status/" +
+          "/api/questionary/questionary-status/" +
             this.status.id +
             "/",
           this.status
