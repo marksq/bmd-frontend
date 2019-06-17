@@ -17,6 +17,11 @@ import Menu from "@/components/Menu.vue";
 import TextareaField from "@/components/fields/TextareaField.vue";
 import Header from "@/components/Header.vue";
 
+if (localStorage.getItem("token")) {
+  axios.defaults.headers.common["Authorization"] =
+    "JWT " + localStorage.getItem("token");
+}
+
 export default {
   name: "home",
   components: {
