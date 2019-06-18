@@ -25,7 +25,7 @@ export default {
     Header
   },
   data: () => ({
-    fields: {},
+    fields: [],
     options: {}
   }),
   created() {
@@ -35,7 +35,6 @@ export default {
     }
 
     axios.get("/api/questionary/questionary-fields/").then(response => {
-      console.log(response);
       this.fields = JSON.stringify(response.data[0].fields, null, 2);
       this.options = JSON.stringify(response.data[0].options, null, 2);
     });
@@ -49,11 +48,9 @@ export default {
 
       axios
         .put("/api/questionary/questionary-fields/1/", fieldsAndOptions)
-        .then(response => {
-          console.log("response: ", response);
-        })
+        .then(response => {})
         .catch(error => {
-          console.log("error: ", error);
+          axios.post("/api/questionary/questionary-fields/", fieldsAndOptions);
         });
     }
   }
