@@ -48,18 +48,17 @@ export default {
     options: {}
   }),
   created() {
+    if (localStorage.getItem("token")) {
+      axios.defaults.headers.common["Authorization"] =
+        "JWT " + localStorage.getItem("token");
+    }
+
+    axios.get("/api/questionary/questionary-fields/1/").then(response => {
+      this.fields = response.data.fields;
+      this.options = response.data.options;
+    });
     axios
-      .get("/api/questionary/questionary-fields/1/")
-      .then(response => {
-        this.fields = response.data.fields;
-        this.options = response.data.options;
-      });
-    axios
-      .get(
-        "/api/questionary/questionaries/" +
-          this.$route.params.id +
-          "/"
-      )
+      .get("/api/questionary/questionaries/" + this.$route.params.id + "/")
       .then(response => {
         this.survey = response.data.questionary;
         this.comment = response.data.questionary_status;
@@ -68,15 +67,10 @@ export default {
   methods: {
     createSurvey() {
       axios
-        .put(
-          "/api/questionary/questionaries/" +
-            this.$route.params.id +
-            "/",
-          {
-            questionary: this.survey,
-            email: this.survey.email
-          }
-        )
+        .put("/api/questionary/questionaries/" + this.$route.params.id + "/", {
+          questionary: this.survey,
+          email: this.survey.email
+        })
         .then(response => {
           console.log("response: ", response);
           this.$router.push({ name: "submittedSurvey" });

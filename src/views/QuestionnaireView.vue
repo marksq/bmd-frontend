@@ -82,24 +82,21 @@ export default {
     ]
   }),
   created() {
-    axios
-      .get("/api/questionary/questionary-fields/1/")
-      .then(response => {
-        this.fields = response.data.fields;
-        this.options = response.data.options;
-      });
+    if (localStorage.getItem("token")) {
+      axios.defaults.headers.common["Authorization"] =
+        "JWT " + localStorage.getItem("token");
+    }
 
+    axios.get("/api/questionary/questionary-fields/1/").then(response => {
+      this.fields = response.data.fields;
+      this.options = response.data.options;
+    });
+
+    axios.get("/api/questionary/document-templates/").then(response => {
+      this.documents = response.data;
+    });
     axios
-      .get("/api/questionary/document-templates/")
-      .then(response => {
-        this.documents = response.data;
-      });
-    axios
-      .get(
-        "/api/questionary/questionaries/" +
-          this.$route.params.id +
-          "/"
-      )
+      .get("/api/questionary/questionaries/" + this.$route.params.id + "/")
       .then(response => {
         this.survey = response.data.questionary;
         this.status = response.data.questionary_status;
@@ -109,9 +106,7 @@ export default {
     editStatus() {
       axios
         .put(
-          "/api/questionary/questionary-status/" +
-            this.status.id +
-            "/",
+          "/api/questionary/questionary-status/" + this.status.id + "/",
           this.status
         )
         .then(response => {

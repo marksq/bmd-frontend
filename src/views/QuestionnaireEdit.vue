@@ -17,11 +17,6 @@ import Menu from "@/components/Menu.vue";
 import TextareaField from "@/components/fields/TextareaField.vue";
 import Header from "@/components/Header.vue";
 
-if (localStorage.getItem("token")) {
-  axios.defaults.headers.common["Authorization"] =
-    "JWT " + localStorage.getItem("token");
-}
-
 export default {
   name: "home",
   components: {
@@ -34,13 +29,16 @@ export default {
     options: {}
   }),
   created() {
-    axios
-      .get("/api/questionary/questionary-fields/")
-      .then(response => {
-        console.log(response);
-        this.fields = JSON.stringify(response.data[0].fields, null, 2);
-        this.options = JSON.stringify(response.data[0].options, null, 2);
-      });
+    if (localStorage.getItem("token")) {
+      axios.defaults.headers.common["Authorization"] =
+        "JWT " + localStorage.getItem("token");
+    }
+
+    axios.get("/api/questionary/questionary-fields/").then(response => {
+      console.log(response);
+      this.fields = JSON.stringify(response.data[0].fields, null, 2);
+      this.options = JSON.stringify(response.data[0].options, null, 2);
+    });
   },
   methods: {
     saveFields() {
@@ -50,10 +48,7 @@ export default {
       fieldsAndOptions.options = JSON.parse(this.options);
 
       axios
-        .put(
-          "/api/questionary/questionary-fields/1/",
-          fieldsAndOptions
-        )
+        .put("/api/questionary/questionary-fields/1/", fieldsAndOptions)
         .then(response => {
           console.log("response: ", response);
         })

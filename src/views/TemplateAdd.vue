@@ -19,11 +19,6 @@ import TextareaField from "@/components/fields/TextareaField.vue";
 import TextField from "@/components/fields/TextField.vue";
 import Header from "@/components/Header.vue";
 
-if (localStorage.getItem("token")) {
-  axios.defaults.headers.common["Authorization"] =
-    "JWT " + localStorage.getItem("token");
-}
-
 export default {
   name: "home",
   components: {
@@ -36,6 +31,12 @@ export default {
     templateHTML: "",
     name: ""
   }),
+  created() {
+    if (localStorage.getItem("token")) {
+      axios.defaults.headers.common["Authorization"] =
+        "JWT " + localStorage.getItem("token");
+    }
+  },
   methods: {
     create() {
       axios

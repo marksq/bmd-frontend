@@ -23,11 +23,6 @@ import axios from "axios";
 import Menu from "@/components/Menu.vue";
 import Header from "@/components/Header.vue";
 
-if (localStorage.getItem("token")) {
-  axios.defaults.headers.common["Authorization"] =
-    "JWT " + localStorage.getItem("token");
-}
-
 export default {
   name: "templateDesigner",
   data: () => ({
@@ -35,11 +30,14 @@ export default {
   }),
   components: { Header, Menu },
   created() {
-    axios
-      .get("/api/questionary/document-templates/")
-      .then(response => {
-        this.templates = response.data;
-      });
+    if (localStorage.getItem("token")) {
+      axios.defaults.headers.common["Authorization"] =
+        "JWT " + localStorage.getItem("token");
+    }
+
+    axios.get("/api/questionary/document-templates/").then(response => {
+      this.templates = response.data;
+    });
   },
   methods: {
     create_template() {

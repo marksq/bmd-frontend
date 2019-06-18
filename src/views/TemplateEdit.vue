@@ -32,11 +32,13 @@ export default {
     name: ""
   }),
   created() {
+    if (localStorage.getItem("token")) {
+      axios.defaults.headers.common["Authorization"] =
+        "JWT " + localStorage.getItem("token");
+    }
+
     axios
-      .get(
-        "/api/questionary/document-templates/" +
-          this.$route.params.id
-      )
+      .get("/api/questionary/document-templates/" + this.$route.params.id)
       .then(response => {
         this.templateHTML = response.data.template;
         this.name = response.data.name;
@@ -46,9 +48,7 @@ export default {
     edit() {
       axios
         .put(
-          "/api/questionary/document-templates/" +
-            this.$route.params.id +
-            "/",
+          "/api/questionary/document-templates/" + this.$route.params.id + "/",
           {
             template: this.templateHTML,
             name: this.name
@@ -65,9 +65,7 @@ export default {
     remove() {
       axios
         .delete(
-          "/api/questionary/document-templates/" +
-            this.$route.params.id +
-            "/"
+          "/api/questionary/document-templates/" + this.$route.params.id + "/"
         )
         .then(response => {
           console.log("response: ", response);

@@ -39,11 +39,6 @@ import axios from "axios";
 import Menu from "@/components/Menu.vue";
 import Header from "@/components/Header.vue";
 
-if (localStorage.getItem("token")) {
-  axios.defaults.headers.common["Authorization"] =
-    "JWT " + localStorage.getItem("token");
-}
-
 export default {
   name: "questionnaire",
   data: () => ({
@@ -57,26 +52,25 @@ export default {
   }),
   components: { Menu, Header },
   created() {
-    axios
-      .get("/api/questionary/questionaries/")
-      .then(response => {
-        this.questionnaires = response.data;
-      });
+    if (localStorage.getItem("token")) {
+      axios.defaults.headers.common["Authorization"] =
+        "JWT " + localStorage.getItem("token");
+    }
+
+    axios.get("/api/questionary/questionaries/").then(response => {
+      this.questionnaires = response.data;
+    });
   },
   methods: {
     removeApproved() {
-      axios
-        .delete("/api/questionary/delete-accepted/")
-        .then(() => {
-          this.$router.go();
-        });
+      axios.delete("/api/questionary/delete-accepted/").then(() => {
+        this.$router.go();
+      });
     },
     removeRejected() {
-      axios
-        .delete("/api/questionary/delete-rejected/")
-        .then(() => {
-          this.$router.go();
-        });
+      axios.delete("/api/questionary/delete-rejected/").then(() => {
+        this.$router.go();
+      });
     }
   }
 };
