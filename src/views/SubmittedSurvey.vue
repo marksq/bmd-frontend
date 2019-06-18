@@ -26,7 +26,6 @@ export default {
       axios
         .post("/address/", this.survey)
         .then(response => {
-          console.log("response: ", response);
           this.$router.push({ name: "approvedSurvey" });
         })
         .catch(error => {

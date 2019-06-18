@@ -55,7 +55,6 @@ export default {
           }
         )
         .then(response => {
-          console.log("response: ", response);
           this.$router.push({ name: "TemplatesDesigner" });
         })
         .catch(error => {
@@ -68,7 +67,6 @@ export default {
           "/api/questionary/document-templates/" + this.$route.params.id + "/"
         )
         .then(response => {
-          console.log("response: ", response);
           this.$router.push({ name: "TemplatesDesigner" });
         })
         .catch(error => {

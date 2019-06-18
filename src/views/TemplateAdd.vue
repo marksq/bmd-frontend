@@ -45,7 +45,6 @@ export default {
           name: this.name
         })
         .then(response => {
-          console.log("response: ", response);
           this.$router.push({ name: "TemplatesDesigner" });
         })
         .catch(error => {

@@ -110,7 +110,6 @@ export default {
           this.status
         )
         .then(response => {
-          console.log("response: ", response);
           this.$router.push({ name: "Questionnaires" });
         })
         .catch(error => {

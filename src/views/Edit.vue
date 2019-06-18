@@ -72,11 +72,9 @@ export default {
           email: this.survey.email
         })
         .then(response => {
-          console.log("response: ", response);
           this.$router.push({ name: "submittedSurvey" });
         })
         .catch(error => {
-          console.log("error: ", error);
           this.$router.push({ name: "submittedSurvey" });
         });
     }

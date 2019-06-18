@@ -44,12 +44,10 @@ export default {
     options: {}
   }),
   created() {
-    axios
-      .get("/api/questionary/questionary-fields/1/")
-      .then(response => {
-        this.fields = response.data.fields;
-        this.options = response.data.options;
-      });
+    axios.get("/api/questionary/questionary-fields/1/").then(response => {
+      this.fields = response.data.fields;
+      this.options = response.data.options;
+    });
   },
   methods: {
     createSurvey() {
@@ -59,7 +57,6 @@ export default {
           email: this.survey.email
         })
         .then(response => {
-          console.log("response: ", response);
           this.$router.push({
             name: "submittedSurvey",
             params: { id: response.data.id }
