@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
     "v-runtime-template": "^1.6.2",
